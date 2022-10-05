@@ -1,16 +1,18 @@
+package data;
+
 import java.util.Objects;
 
-public class FileClackData extends ClackData{
+public class FileClackData extends ClackData {
     private String fileName;
     private String fileContents;
 
-    FileClackData(String userName, String fileName, int type){
+    public FileClackData(String userName, String fileName, int type){
         super(userName, type);
         this.fileName = fileName;
         this.fileContents = null;
     }
 
-    FileClackData(){
+    public FileClackData(){
         super("Anon", 0);
         this.fileName = "Empty Filename";
         this.fileContents = null;
@@ -25,8 +27,7 @@ public class FileClackData extends ClackData{
     }
 
     public String getData(){
-        return null; // supposed to return null right now
-        // (As of part 1 in the project)
+        return null;
     }
 
     void readFileContents(){}

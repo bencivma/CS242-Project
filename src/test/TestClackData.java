@@ -1,3 +1,9 @@
+package test;
+import data.*;
+
+import data.FileClackData;
+import data.MessageClackData;
+
 public class TestClackData {
     public static void main (String args[]){
         MessageClackData m1 = new MessageClackData("Michael", "Hello!", 2);

@@ -1,3 +1,5 @@
+package data;
+
 import java.util.Objects;
 
 public class MessageClackData extends ClackData {
@@ -22,8 +24,6 @@ public class MessageClackData extends ClackData {
     }
 
     public boolean equals(MessageClackData other){
-        // if this doesn't work reference week 3 inheritance
-        // slide show slide 57, may need some sort of declaration
         return Objects.equals(this.getUserName(), other.getUserName()) &&
                 this.getType() == other.getType() &&
                 Objects.equals(this.getData(), other.getData()) &&
