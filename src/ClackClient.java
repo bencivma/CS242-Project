@@ -49,7 +49,7 @@ public class ClackClient{
      public String getHostName(){return hostName;}
      public int getPort(){return port;}
      public int hashCode(){
-          return (int) (this.port);
+          return this.userName.hashCode() + this.hostName.hashCode() + this.port;
      }
      public boolean equals(Object other){
           ClackClient otherClient = (ClackClient) other;
