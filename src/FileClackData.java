@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class FileClackData extends ClackData{
     private String fileName;
     private String fileContents;
@@ -32,22 +34,22 @@ public class FileClackData extends ClackData{
     void writeFileContents(){}
 
     public int hashCode(){
-        return 17*(this.fileName.hashCode() + this.fileContents.hashCode());
+        return 17*(this.fileName.hashCode());
     }
 
     public boolean equals(FileClackData other){
-        return this.getUserName() == other.getUserName() &&
+        return Objects.equals(this.getUserName(), other.getUserName()) &&
                 this.getType() == other.getType() &&
-                this.getData() == other.getData() &&
-                this.fileName == other.fileName &&
-                this.fileContents == other.fileContents;
+                Objects.equals(this.getData(), other.getData()) &&
+                Objects.equals(this.fileName, other.fileName) &&
+                Objects.equals(this.fileContents, other.fileContents);
     }
 
     public String toString(){
         return "The username is: " + this.getUserName() + "\n" +
                 "The type is: " + this.getType() + "\n" +
                 "The date is: " + this.getDate() + "\n" +
-                "The file name is: " + this.fileName +
-                "The file contents are" + this.fileContents +"\n\n";
+                "The file name is: " + this.fileName + "\n" +
+                "The file contents are: " + this.fileContents +"\n\n";
     }
 }

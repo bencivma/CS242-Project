@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class MessageClackData extends ClackData {
     String message;
 
@@ -8,29 +10,24 @@ public class MessageClackData extends ClackData {
 
     public MessageClackData(){ // default constructor
         this("Anon","Empty Message", 0);
-        // unsure if this should be defaulted to 0 or 1
     }
 
     public String getData() {
         return this.message;
     }
 
-//    public int hashCode(MessageClackData other){
-//     if (this.equals(other)){
-//         return ...
-//     }
-//     else{
-//         return ...
-//     }
-//    }
+    public int hashCode(){
+        return 31*(this.type + this.message.hashCode() + getUserName().hashCode()
+            + getDate().hashCode());
+    }
 
     public boolean equals(MessageClackData other){
         // if this doesn't work reference week 3 inheritance
         // slide show slide 57, may need some sort of declaration
-        return this.getUserName() == other.getUserName() &&
+        return Objects.equals(this.getUserName(), other.getUserName()) &&
                 this.getType() == other.getType() &&
-                this.getData() == other.getData() &&
-                this.message == other.message;
+                Objects.equals(this.getData(), other.getData()) &&
+                Objects.equals(this.message, other.message);
     }
 
     public String toString(){

@@ -37,5 +37,4 @@ public abstract class ClackData {
     }
 
     public abstract String getData();
-    // unsure of what type getData should return if any at all
 }
