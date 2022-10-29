@@ -1,7 +1,5 @@
 package data;
 
-import java.util.Objects;
-
 public class MessageClackData extends ClackData {
     String message;
 
@@ -23,17 +21,20 @@ public class MessageClackData extends ClackData {
             + getDate().hashCode());
     }
 
-    public boolean equals(MessageClackData other){
-        return Objects.equals(this.getUserName(), other.getUserName()) &&
-                this.getType() == other.getType() &&
-                Objects.equals(this.getData(), other.getData()) &&
-                Objects.equals(this.message, other.message);
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public String toString(){
-        return "The username is: " + this.getUserName() + "\n" +
-                "The type is: " + this.getType() + "\n" +
-                "The date is: " + this.getDate() + "\n" +
-                "The message is: " + this.message + "\n\n";
+        return "This instance of MessageClackData has the following properties:\n"
+                + "Username: " + this.username + "\n"
+                + "Type: " + this.type + "\n"
+                + "Date: " + this.date.toString() + "\n"
+                + "Message: " + this.message + "\n";
     }
 }

@@ -13,8 +13,8 @@ public class FileClackData extends ClackData {
     }
 
     public FileClackData(){
-        super("Anon", 0);
-        this.fileName = "Empty Filename";
+        super(ClackData.CONSTANT_SENDFILE);
+        this.fileName = "";
         this.fileContents = null;
     }
 
@@ -27,7 +27,7 @@ public class FileClackData extends ClackData {
     }
 
     public String getData(){
-        return null;
+        return this.fileContents;
     }
 
     void readFileContents(){}
@@ -38,15 +38,16 @@ public class FileClackData extends ClackData {
         return 17*(this.fileName.hashCode());
     }
 
-    public boolean equals(FileClackData other){
-        return Objects.equals(this.getUserName(), other.getUserName()) &&
-                this.getType() == other.getType() &&
-                Objects.equals(this.getData(), other.getData()) &&
-                Objects.equals(this.fileName, other.fileName) &&
-                Objects.equals(this.fileContents, other.fileContents);
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
-    public String toString(){
+        public String toString(){
         return "The username is: " + this.getUserName() + "\n" +
                 "The type is: " + this.getType() + "\n" +
                 "The date is: " + this.getDate() + "\n" +
