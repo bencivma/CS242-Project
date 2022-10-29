@@ -87,9 +87,9 @@ public abstract class ClackData {
     }
     protected String decrypt(String inputStringToDecrypt, String key)
     {
-        String decryptedString="";
+        String decryptedString = "";
 
-        for(int x =0; x < inputStringToDecrypt.length(); x++)
+        for(int x = 0; x < inputStringToDecrypt.length(); x++)
         {
             char nextLetter;
             int newVal;
@@ -97,7 +97,7 @@ public abstract class ClackData {
             newVal = calcIndex(letters,inputStringToDecrypt.charAt(x)) - calcIndex(letters,key.charAt(x));
             newVal = Math.abs(newVal);
 
-            if(newVal >= letters.length)
+            if(newVal > 25)
             {
                 int temp = newVal-25;
                 newVal = temp -1;

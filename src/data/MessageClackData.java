@@ -9,11 +9,18 @@ public class MessageClackData extends ClackData {
     }
 
     public MessageClackData(){ // default constructor
-        this("Anon","Empty Message", 0);
+        this("Anon","", CONSTANT_LISTUSERS);
     }
 
+
     public String getData() {
-        return this.message;
+        return message;
+    }
+
+    public MessageClackData(String userName, int type, String Message, String key)
+    {
+        super(userName, type);
+        message = encrypt(Message, key);
     }
 
     public int hashCode(){
