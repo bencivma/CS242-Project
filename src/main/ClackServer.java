@@ -7,13 +7,18 @@ import java.net.*;
 
 public class ClackServer {
     public static void main(String[] args){
-        if (args == null) {
-            ClackServer server;
-        } else {
-            ClackServer server = new ClackServer(Integer.getInteger(args[0]));
+        ClackServer server;
+        if (args.length == 0) {server = new ClackServer();}
+        else {
+            try {
+                int port = Integer.parseInt(args[0]);
+                server = new ClackServer(port);
+            } catch (NumberFormatException nfe) {
+                System.err.println("Please input an int");
+                server = new ClackServer();
+            }
         }
-        System.out.println("Starting...");
-        start();
+        server.start();
     }
 
     private static final int DEFAULT_PORT = 7000;  // The default port number
