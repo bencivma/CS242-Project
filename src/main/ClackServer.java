@@ -5,15 +5,24 @@ import java.util.Objects;
 import java.io.*;
 import java.net.*;
 
-
 public class ClackServer {
+    public static void main(String[] args){
+        if (args == null) {
+            ClackServer server;
+        } else {
+            ClackServer server = new ClackServer(Integer.getInteger(args[0]));
+        }
+        System.out.println("Starting...");
+        start();
+    }
+
     private static final int DEFAULT_PORT = 7000;  // The default port number
     private int port;  // An integer representing the port number on the server connected to
     private boolean closeConnection = false;  // A boolean representing whether the connection is closed or not
-    private ClackData dataToReceiveFromClient;  // A ClackData object representing the data received from the client
-    private ClackData dataToSendToClient;  // A ClackData object representing the data sent to client
-    private ObjectInputStream inFromClient;
-    private ObjectOutputStream outToClient;
+    private static ClackData dataToReceiveFromClient;  // A ClackData object representing the data received from the client
+    private static ClackData dataToSendToClient;  // A ClackData object representing the data sent to client
+    private static ObjectInputStream inFromClient;
+    private static ObjectOutputStream outToClient;
 
     public ClackServer(int port) throws IllegalArgumentException{
         if (port < 1024) {
@@ -35,7 +44,7 @@ public class ClackServer {
     }
 
 
-    public void start() {
+    public static void start() {
         try {
             ServerSocket sskt = new ServerSocket(DEFAULT_PORT);
             Socket cskt = sskt.accept();
@@ -58,7 +67,7 @@ public class ClackServer {
         }
     }
 
-    public void receiveData() {
+    public static void receiveData() {
         try {
             dataToReceiveFromClient = (ClackData) inFromClient.readObject();
         } catch (ClassNotFoundException cnfe){
@@ -68,7 +77,7 @@ public class ClackServer {
         }
     }
 
-    public void sendData() {
+    public static void sendData() {
         try{
             outToClient.writeObject(dataToSendToClient);
         } catch (IOException ioe){
