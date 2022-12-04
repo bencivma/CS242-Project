@@ -76,10 +76,6 @@ public class ClackClient {
             while (!this.closeConnection) {
                 readClientData();
                 sendData();
-
-                if (this.closeConnection) {
-                    break;
-                }
             }
 
             this.inFromServer.close();
