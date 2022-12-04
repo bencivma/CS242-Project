@@ -1,6 +1,7 @@
 package main;
 
 import data.ClackData;
+import data.MessageClackData;
 
 import java.io.*;
 import java.net.Socket;
@@ -29,10 +30,16 @@ public class ServerSideClientIO implements Runnable{
         try {
             this.inFromClient = new ObjectInputStream(clientSocket.getInputStream());
             this.outToClient = new ObjectOutputStream(clientSocket.getOutputStream());
-            while(!closeConnection){
+            while(!this.closeConnection){
                 receiveData();
-                this.server.broadcast();
+                if (this.closeConnection) {
+                    break;
+                }
+                this.server.broadcast(this.dataToReceiveFromClient);
             }
+            this.inFromClient.close();
+            this.outToClient.close();
+            this.clientSocket.close();
         } catch (IOException ioe) {
             System.err.println("IO Exception Occurred");
         }
@@ -42,17 +49,12 @@ public class ServerSideClientIO implements Runnable{
 
         try {
             this.dataToReceiveFromClient = (ClackData) this.inFromClient.readObject();
-
-            // For debugging purposes:
-            System.out.println("Received data from the client:");
-            System.out.println("From: " + this.dataToReceiveFromClient.getUserName());
-            System.out.println("Date: " + this.dataToReceiveFromClient.getDate());
-            System.out.println("Data: " + this.dataToReceiveFromClient.getData("Time")); //used to be DEFAULT_KEY
-            System.out.println();
-
-            // Determines if the connection is to be closed.
             if (this.dataToReceiveFromClient.getType() == ClackData.CONSTANT_LOGOUT) {
                 this.closeConnection = true;
+                this.server.remove(this);
+            }
+            else if (this.dataToReceiveFromClient.getType() == ClackData.CONSTANT_LISTUSERS){
+                this.dataToReceiveFromClient = new MessageClackData(this.dataToReceiveFromClient.getUserName(),this.server.listUsers(), 0)
             }
         } catch (ClassNotFoundException cnfe) {
             System.err.println("ClassNotFoundException thrown in receiveData(): " + cnfe.getMessage());
